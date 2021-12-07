@@ -6,7 +6,9 @@ import { setContext } from '@apollo/client/link/context';
 import { cache } from './cache';
 
 const graphqluri = process.env.REACT_APP_GRAPHQL_URI;
-
+console.log(`graphqluri:${graphqluri}`)
+console.log(process.env)
+console.log('-----')
 const httpLink = createHttpLink({
   uri: graphqluri,
 });

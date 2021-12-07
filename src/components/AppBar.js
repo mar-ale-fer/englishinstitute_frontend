@@ -5,15 +5,6 @@ import { createBrowserHistory } from "history";
 
 import MenuIcon from '@mui/icons-material/Menu';
 
-// import AppBar from "@material-ui/core/AppBar";
-// import Toolbar from "@material-ui/core/Toolbar";
-// import Typography from "@material-ui/core/Typography";
-// import Drawer from "@material-ui/core/Drawer";
-// import List from "@material-ui/core/List";
-// import ListItem from "@material-ui/core/ListItem";
-// import ListItemText from "@material-ui/core/ListItemText";
-// import IconButton from "@material-ui/core/IconButton";
-// import Button from '@material-ui/core/Button';
 import { withStyles } from "@material-ui/core/styles";
 import { 
   IconButton, 
@@ -26,15 +17,8 @@ import {
   AppBar,
   Button
 } from '@mui/material';
-// import LoginUserFormik from "../pages/LoginUserFormik";
-// import UserUpdate from "../pages/UserUpdate";
-// import UserCreate from "../pages/UserCreate";
-// import { UsersListPage } from "../pages/UsersList";
-// import { ApplicationsListPage } from "../pages/ApplicationsList";
-// import ApplicationUpdate from "../pages/ApplicationUpdate";
-// import ApplicationCreate from "../pages/ApplicationCreate";
-// import ApplicationDetail from "../pages/ApplicationDetail";
-// import UserDetail from "../pages/UserDetail";
+
+import InstituteCreate from "../pages/InstituteCreate";
 
 import institute_logo from '../images/institute_logo.png';
 const drawerWidth = 240;
@@ -136,7 +120,7 @@ const MyDrawer = withStyles(styles)(
 
         </List>
         
-        <img src={institute_logo} width="30%" alt="Logo Instituto" />
+        {/* <img src={institute_logo} width="30%" alt="Logo Instituto" /> */}
 
         <Typography variant="h6" >
           NQN Institute
@@ -159,13 +143,14 @@ const MyDrawer = withStyles(styles)(
                   Cerrar la sesión
             </Button>      
             <Typography>
-            <img src={institute_logo} width="200px" alt="Logo Instituto" />
+            {/* <img src={institute_logo} width="200px" alt="Logo Instituto" /> */}
             </Typography>       
           </div>
         }>
           
 
         </Route>
+        <Route path='/create-institute' exact element={<InstituteCreate />}/>
         {/* <Route path='/login' component={LoginUserFormik} />
         <Route path='/users' component={UsersListPage} />
         <Route path='/user-update/:entityid/:random' component={UserUpdate} />

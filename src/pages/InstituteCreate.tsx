@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import * as Yup from 'yup';
 import { TextField,  } from 'formik-material-ui';
 // import { CREATE_USER } from '../operations/mutations/userMutations';
-import { CREATE_INSTITUTE } from '../operations/mutations/InstituteMutations';
+import { CREATE_INSTITUTE} from '../operations/mutations/InstituteMutations';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -11,30 +11,31 @@ import {
 } from '@material-ui/core';
 
 const esquema_validacion = Yup.object({
+  instituteName: Yup.string()
+    .min(2, 'Debe tener al menos 2 caracteres')
+    .required('Requerido'),
   firstName: Yup.string()
-    .min(2, 'Debe tener más de 2 caracteres')
+    .min(2, 'Debe tener al menos 2 caracteres')
     .required('Requerido'),
   lastName: Yup.string()
-    .min(2, 'Debe tener más de 2 caracteres')
-    .required('Requerido'),
-  code: Yup.string()
-    .min(2, 'Debe tener más de 2 caracteres')
-    .required('Requerido'),
-  code2: Yup.string()
-    .min(2, 'Debe tener más de 2 caracteres')
+    .min(2, 'Debe tener al menos 2 caracteres')
     .required('Requerido'),
   email: Yup.string()
     .email('Formato de email inválido')
+    .required('Requerido'),    
+  password: Yup.string()
+    .min(8, 'Debe tener al menos 8 caracteres')
     .required('Requerido'),
-  type: Yup.string(),
+  passwordConfirmation: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Las claves deben coincidir')
 });
   
-const UserCreate = () =>  {
+const InstituteCreate = () =>  {
   let navigate = useNavigate();
-  const [createUser, { loading }] = useMutation(CREATE_INSTITUTE );
+  const [createInstituteWithUser, { loading }] = useMutation(CREATE_INSTITUTE );
 
   const GoBackToUsers = () =>{ 
-    navigate('/users');
+    navigate('/');
   };
 
   return (
@@ -43,12 +44,12 @@ const UserCreate = () =>  {
 
       initialValues={
         {
-          code:'',
-          code2:'',
+          instituteName:'',
           firstName:'',
           lastName:'',
           email:'',
-          type:'',
+          password:'',
+          passwordConfirmation:'',
           general: ''
         }
       }
@@ -57,19 +58,18 @@ const UserCreate = () =>  {
 
         console.log('onsubmit');
 
-        createUser({ variables: {
-          createUserCode: values.code,
-          createUserCode2: values.code2,
-          createUserFirstName: values.firstName,
-          createUserLastName: values.lastName,
-          createUserEmail: values.email,
-          createUserType: values.type,
+        createInstituteWithUser({ variables: {
+          createInstituteWithUserName: values.instituteName,
+          createInstituteWithUserFirstName: values.firstName,
+          createInstituteWithUserLastName: values.lastName,
+          createInstituteWithUserEmail: values.email,
+          createInstituteWithUserPassword: values.password
         } })
         .then((data) => {
-          const response: any = data.data.createUser;
+          const response: any = data.data.createInstituteWithUser;
           if ((response.success) as boolean ) {
 
-            history.push('/users');
+            navigate('/');
           } else {
             alert(response.message);
             actions.setFieldError('general', response.message);
@@ -93,25 +93,13 @@ const UserCreate = () =>  {
               type="text"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
-              value={props.values.code} 
-              name="code" 
-              placeholder="CUIL" 
+              value={props.values.instituteName}  
+              name="instituteName" 
+              placeholder="Nombre del Instituto" 
               component={TextField}
           /> 
-          {props.touched.code && props.errors.code ? 
-          (<div>{props.errors.code}</div>) : null}
-
-          <Field 
-              type="text"
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.code2} 
-              name="code2" 
-              placeholder="Código" 
-              component={TextField}
-          /> 
-          {props.touched.code2 && props.errors.code2 ? 
-          (<div>{props.errors.code2}</div>) : null}
+          {props.touched.instituteName && props.errors.instituteName ? 
+          (<div>{props.errors.instituteName}</div>) : null}
 
           <Field 
               type="text"
@@ -150,17 +138,28 @@ const UserCreate = () =>  {
           (<div>{props.errors.email}</div>) : null}
 
           <Field 
-              type="text"
+              type="password"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
-              value={props.values.type} 
-              name="type" 
-              placeholder="Tipo" 
+              value={props.values.password} 
+              name="password" 
+              placeholder="password" 
               component={TextField}
           />
+          {props.touched.password && props.errors.password ? 
+          (<div>{props.errors.password}</div>) : null}
 
-          {props.touched.type && props.errors.type ? 
-          (<div>{props.errors.type}</div>) : null}    
+          <Field 
+              type="password"
+              onChange={props.handleChange}
+              onBlur={props.handleBlur}
+              value={props.values.passwordConfirmation} 
+              name="passwordConfirmation" 
+              placeholder="repita el password" 
+              component={TextField}
+          />
+          {props.touched.passwordConfirmation && props.errors.passwordConfirmation ? 
+          (<div>{props.errors.passwordConfirmation}</div>) : null}
           
           <div style={{ color: 'red' }}>{props.errors.general}</div>
           <Button 
@@ -170,7 +169,7 @@ const UserCreate = () =>  {
             // onClick={submitForm}
             type="submit"
           >
-            Crear usuario
+            Crear instituto
           </Button>
           <Button 
             variant="contained"
@@ -188,4 +187,4 @@ const UserCreate = () =>  {
 );
 };
 
-export default UserCreate;
+export default InstituteCreate;
