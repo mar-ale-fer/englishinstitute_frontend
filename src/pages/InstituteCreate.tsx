@@ -2,9 +2,9 @@ import { Formik, Form, Field } from 'formik';
 import { useMutation } from '@apollo/client';
 import * as Yup from 'yup';
 import { TextField,  } from 'formik-material-ui';
-import { CREATE_USER } from '../operations/mutations/userMutations';
-import { useHistory } from 'react-router-dom';
-import { myReactiveVariable } from '../cache';
+// import { CREATE_USER } from '../operations/mutations/userMutations';
+import { CREATE_INSTITUTE } from '../operations/mutations/InstituteMutations';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Button, 
@@ -30,11 +30,11 @@ const esquema_validacion = Yup.object({
 });
   
 const UserCreate = () =>  {
-  let history = useHistory();
-  const [createUser, { loading }] = useMutation(CREATE_USER);
+  let navigate = useNavigate();
+  const [createUser, { loading }] = useMutation(CREATE_INSTITUTE );
 
   const GoBackToUsers = () =>{ 
-    history.push('/users');
+    navigate('/users');
   };
 
   return (
@@ -68,9 +68,7 @@ const UserCreate = () =>  {
         .then((data) => {
           const response: any = data.data.createUser;
           if ((response.success) as boolean ) {
-            //update reactiver variable used in userslist page, to reflect the deleted object
-            myReactiveVariable( Math.random().toString(36) as string )
-            
+
             history.push('/users');
           } else {
             alert(response.message);
