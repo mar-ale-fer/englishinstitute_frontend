@@ -139,11 +139,8 @@ const MyDrawer = withStyles(styles)(
         <img src={institute_logo} width="30%" alt="Logo Instituto" />
 
         <Typography variant="h6" >
-          Servidor de autorizaciones
-        </Typography>
-        <Typography variant="h6" >
-          ISSN 
-        </Typography>         
+          NQN Institute
+        </Typography>        
       </Drawer>
 
  
