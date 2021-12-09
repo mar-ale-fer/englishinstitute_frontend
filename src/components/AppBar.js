@@ -18,8 +18,8 @@ import {
   Button
 } from '@mui/material';
 
-import InstituteCreate from "../pages/InstituteCreate";
-
+import InstituteCreate from "../pages/institute/InstituteCreate";
+import Login from "../pages/access/Login"
 import institute_logo from '../images/institute_logo.png';
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -66,6 +66,28 @@ const MyToolbar = withStyles(styles)(({ classes, title, onMenuClick }) => (
   </Fragment>
 ));
 
+const MenuItems = [
+  {
+    to:"/login",
+    title:"Iniciar sesión",
+    optionText:"Iniciar sesión"
+  },    
+  {
+    to:"/users",
+    title:"Usuarios",
+    optionText:"Usuarios"
+  },
+  {
+    to:"/applications",
+    title:"Aplicaciones",
+    optionText:"Aplicaciones"
+  },    
+  {
+    to:"/",
+    title:"Cerrar sesión",
+    optionText:"Cerrar sesión"
+  },  
+]
 const MyDrawer = withStyles(styles)(
   ({ classes, variant, open, onClose, onItemClick }) => (
     <Router history={history}>
@@ -83,44 +105,21 @@ const MyDrawer = withStyles(styles)(
           })}
         />
         <List>
-          <ListItem
-            button
-            component={Link}
-            to="/"
-            onClick={onItemClick("Inicio")}
-          >
-            <ListItemText>Cerrar sesión</ListItemText>
+          { MenuItems && MenuItems.map((menuItem, index)=> 
+            <ListItem key={`menu-item-${index}`}
+              button
+              component={Link}
+              to={menuItem.to}
+              onClick={onItemClick(`${menuItem.title}`)}
+            >
+              <ListItemText>{`${menuItem.optionText}`}</ListItemText>
           </ListItem>
+          )
+          }
           
-          <ListItem
-            button
-            component={Link}
-            to="/login"
-            onClick={onItemClick("Iniciar sesión")}
-          >
-            <ListItemText>Iniciar sesión</ListItemText>
-          </ListItem>
-
-          <ListItem
-            button
-            component={Link}
-            to="/users"
-            onClick={onItemClick("Usuarios")}
-          >
-            <ListItemText>Usuarios</ListItemText>
-          </ListItem>
-          <ListItem
-            button
-            component={Link}
-            to="/applications"
-            onClick={onItemClick("Aplicaciones")}
-          >
-            <ListItemText>Aplicaciones</ListItemText>
-          </ListItem>
-
         </List>
         
-        {/* <img src={institute_logo} width="30%" alt="Logo Instituto" /> */}
+        <img src={institute_logo} width="30%" alt="Logo Instituto" />
 
         <Typography variant="h6" >
           NQN Institute
@@ -143,7 +142,7 @@ const MyDrawer = withStyles(styles)(
                   Cerrar la sesión
             </Button>      
             <Typography>
-            {/* <img src={institute_logo} width="200px" alt="Logo Instituto" /> */}
+            <img src={institute_logo} width="200px" alt="Logo Instituto" />
             </Typography>       
           </div>
         }>
@@ -151,7 +150,8 @@ const MyDrawer = withStyles(styles)(
 
         </Route>
         <Route path='/create-institute' exact element={<InstituteCreate />}/>
-        {/* <Route path='/login' component={LoginUserFormik} />
+        <Route path='/login' exact element={<Login />} /> 
+        {/* 
         <Route path='/users' component={UsersListPage} />
         <Route path='/user-update/:entityid/:random' component={UserUpdate} />
         <Route path='/user-create' component={UserCreate} />

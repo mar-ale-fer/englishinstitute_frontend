@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import * as Yup from 'yup';
 import { TextField,  } from 'formik-material-ui';
 // import { CREATE_USER } from '../operations/mutations/userMutations';
-import { CREATE_INSTITUTE} from '../operations/mutations/InstituteMutations';
+import { CREATE_INSTITUTE} from '../../operations/institute/InstituteMutations';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -27,7 +27,7 @@ const esquema_validacion = Yup.object({
     .min(8, 'Debe tener al menos 8 caracteres')
     .required('Requerido'),
   passwordConfirmation: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Las claves deben coincidir')
+    .oneOf([Yup.ref('password')], 'Las claves deben coincidir')
 });
   
 const InstituteCreate = () =>  {
