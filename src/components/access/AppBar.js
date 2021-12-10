@@ -18,9 +18,12 @@ import {
   Button
 } from '@mui/material';
 
-import InstituteCreate from "../pages/institute/InstituteCreate";
-import Login from "../pages/access/Login"
-import institute_logo from '../images/institute_logo.png';
+import InstituteCreate from "../../pages/institute/InstituteCreate";
+import Login from "../../pages/access/Login"
+import institute_logo from '../../images/institute_logo.png';
+
+import { getSessionJWTToken, getRolesFromToken } from "./rolBasedMenuItems";
+
 const drawerWidth = 240;
 const history = createBrowserHistory();
 
@@ -182,7 +185,9 @@ function AppBarInteraction({ classes, variant }) {
     setDrawer(!drawer);
   };
 
-  return (
+  const jwtToken = getSessionJWTToken()
+  const roles =  getRolesFromToken(jwtToken)
+  return ( 
     <div className={classes.root}>
       <MyToolbar title={title} onMenuClick={toggleDrawer} />
       <MyDrawer

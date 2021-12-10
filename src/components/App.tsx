@@ -1,4 +1,4 @@
-import AppBar from './AppBar'
+import AppBar from './access/AppBar'
 
 const App = () => (
   <div style={{
