@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { TextField,  } from 'formik-material-ui';
 import institute_logo from '../../images/institute_logo.png';
 import { userSessionReactVar } from '../../cache';
-import { getUserFromToken } from './rolBasedMenuItems';
+import { getUserFromToken } from './sessionToken';
 import { 
   Typography,
   Button

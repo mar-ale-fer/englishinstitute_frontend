@@ -22,7 +22,7 @@ import InstituteCreate from "../../pages/institute/InstituteCreate";
 import Login from "../../pages/access/Login"
 import institute_logo from '../../images/institute_logo.png';
 
-import { getSessionJWTToken, getUserFromToken } from "../../pages/access/rolBasedMenuItems";
+import { getSessionJWTToken, getUserFromToken } from "../../pages/access/sessionToken";
 
 
 const drawerWidth = 240;
