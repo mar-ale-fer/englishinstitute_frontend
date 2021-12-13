@@ -3,7 +3,8 @@ import { useMutation } from '@apollo/client';
 import * as Yup from 'yup';
 import { TextField,  } from 'formik-material-ui';
 import institute_logo from '../../images/institute_logo.png';
-
+import { userSessionReactVar } from '../../cache';
+import { getUserFromToken } from './rolBasedMenuItems';
 import { 
   Typography,
   Button
@@ -43,6 +44,9 @@ const Login = () => {
          if (authresponse.success) {
             const token: string = authresponse.token;
             localStorage.setItem('token', token);
+            //extract users session
+            userSessionReactVar(getUserFromToken(token))
+
             alert('Sesión iniciada');
          } else {
           actions.setFieldError('general', authresponse.message);

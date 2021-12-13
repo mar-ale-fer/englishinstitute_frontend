@@ -22,7 +22,8 @@ import InstituteCreate from "../../pages/institute/InstituteCreate";
 import Login from "../../pages/access/Login"
 import institute_logo from '../../images/institute_logo.png';
 
-import { getSessionJWTToken, getRolesFromToken } from "./rolBasedMenuItems";
+import { getSessionJWTToken, getUserFromToken } from "../../pages/access/rolBasedMenuItems";
+
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -186,7 +187,10 @@ function AppBarInteraction({ classes, variant }) {
   };
 
   const jwtToken = getSessionJWTToken()
-  const roles =  getRolesFromToken(jwtToken)
+  const user =  getUserFromToken(jwtToken)
+  console.log("------")
+  console.log(user)
+  console.log("======")
   return ( 
     <div className={classes.root}>
       <MyToolbar title={title} onMenuClick={toggleDrawer} />
