@@ -10,7 +10,7 @@ import {
   Button
 } from '@mui/material';
 
-import { CREATE_LOGIN_TOKEN } from '../../operations/access/CreateTokenMutation';
+import { CREATE_LOGIN_TOKEN } from './CreateTokenMutation';
 
 const esquema_validacion = Yup.object({
   username: Yup.string()
@@ -44,7 +44,7 @@ const Login = () => {
          if (authresponse.success) {
             const token: string = authresponse.token;
             localStorage.setItem('token', token);
-            //extract users session
+            //extract users session and save in the apollo cache
             userSessionReactVar(getUserFromToken(token))
 
             alert('Sesión iniciada');

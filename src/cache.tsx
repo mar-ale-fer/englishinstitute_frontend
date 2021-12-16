@@ -17,7 +17,7 @@ export const cache: InMemoryCache = new InMemoryCache({
   }
 });
 
-const userFiltersReact_initialvalue : userSessionType = {
+export const userSessionReactVar_initialvalue : userSessionType = {
     email: '',
     firstName: '',
     lastName: '',
@@ -25,4 +25,4 @@ const userFiltersReact_initialvalue : userSessionType = {
     backend: false
 }
 
-export const userSessionReactVar = makeVar<userSessionType>(userFiltersReact_initialvalue)
+export const userSessionReactVar = makeVar<userSessionType>(userSessionReactVar_initialvalue)
