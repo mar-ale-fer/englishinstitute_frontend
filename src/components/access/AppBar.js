@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import MenuIcon from '@mui/icons-material/Menu';
-
 import { withStyles } from "@material-ui/core/styles";
 import { 
   IconButton, 
@@ -16,12 +15,17 @@ import {
   AppBar,
   Button
 } from '@mui/material';
-
 import InstituteCreate from "../../pages/institute/InstituteCreate";
+
+import LevelsPage from "../../pages/levels/LevelsPage";
+import LevelCreatePage from "../../pages/levels/LevelCreatePage"
+import LevelUpdatePage from "../../pages/levels/LevelUpdate"
+
 import Login from "../../pages/access/Login"
 import institute_logo from '../../images/institute_logo.png';
 import { userSessionReactVar, userSessionReactVar_initialvalue } from '../../cache';
 import { getUserMenu } from "./userMenu";
+import * as log  from 'loglevel';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -71,16 +75,16 @@ const MyToolbar = withStyles(styles)(({ classes, title, onMenuClick }) => (
 
 function AppBarInteraction({ classes, variant }) {
   const [drawer, setDrawer] = useState(false);
-  const [title, setTitle] = useState("Servidor de autorizaciones");
+  const [title, setTitle] = useState("Institute App");
 
   const userSession = userSessionReactVar()
   const MenuItems = (userSession && userSession.roles) 
     ? getUserMenu(userSession.roles)
     : []
-  console.log('--------1')
-  console.log(userSession)
-  console.log(MenuItems)
-  console.log('--------2')
+  log.debug('--------1')
+  log.debug(userSession)
+  log.debug(MenuItems)
+  log.debug('--------2')
   
   const toggleDrawer = () => {
     setDrawer(!drawer);
@@ -142,6 +146,9 @@ function AppBarInteraction({ classes, variant }) {
           }>
           </Route>
           <Route path='/create-institute' exact element={<InstituteCreate />}/>
+          <Route path='/level-create' exact element={<LevelCreatePage />} /> 
+          <Route path='/levels' exact element={<LevelsPage />} /> 
+          <Route path='/level-update/:entityid/:random' element={<LevelUpdatePage />} />
           <Route path='/login' exact element={<Login />} /> 
           <Route path='/logout' exact element={
             <div>

@@ -4,11 +4,13 @@ import App from './components/App';
 import { ApolloClient, createHttpLink, NormalizedCacheObject,ApolloProvider } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { cache } from './cache';
+import * as log  from 'loglevel';
+
+log.setLevel(process.env.REACT_APP_LOG_LEVEL ? process.env.REACT_APP_LOG_LEVEL as log.LogLevelDesc: "ERROR", true)
+
 
 const graphqluri = process.env.REACT_APP_GRAPHQL_URI;
-console.log(`graphqluri:${graphqluri}`)
-console.log(process.env)
-console.log('-----')
+log.info(`graphqluri:${graphqluri}`)
 const httpLink = createHttpLink({
   uri: graphqluri,
 });

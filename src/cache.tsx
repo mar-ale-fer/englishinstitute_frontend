@@ -7,11 +7,15 @@ export const cache: InMemoryCache = new InMemoryCache({
     Query: {
       fields: {
         userSessionReactVar:{
-          read() {
-            return userSessionReactVar();
-          }
+          read() { return userSessionReactVar();  }
         },
- 
+        levelsFilters_RV:{
+          read() { return levelsFilters_RV() }
+        },
+        levelsPageNeedsRefresh_RV:{
+          read() { return levelsPageNeedsRefresh_RV()}
+        }
+
       }
     }
   }
@@ -26,3 +30,7 @@ export const userSessionReactVar_initialvalue : userSessionType = {
 }
 
 export const userSessionReactVar = makeVar<userSessionType>(userSessionReactVar_initialvalue)
+
+export const levelsFilters_RV = makeVar("")
+
+export const levelsPageNeedsRefresh_RV = makeVar<string>("")
