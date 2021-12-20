@@ -1,4 +1,5 @@
-import { levelsFilters_RV, levelsPageNeedsRefresh_RV } from '../../cache';
+import { levelsPageNeedsRefresh_RV } from '../../cache';
+import {GET_LEVELSFILTERS_RV} from './operations/levelsFilters_rv_query'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { SxProps } from '@mui/system';
@@ -17,10 +18,11 @@ const fabStyle_as_SxProps = fabStyle as SxProps;
 
 const LevelsPage = (props : any) => {
   let navigate = useNavigate();
+  const { data:levelsFiltersData } = useQuery(GET_LEVELSFILTERS_RV);  
   const { data, loading, error, refetch } = useQuery(
     LEVELS_QUERY,
     {variables: {
-      name: levelsFilters_RV(),
+      name: levelsFiltersData.levelsFilters_RV,
       debug: levelsPageNeedsRefresh_RV(),
       },
     pollInterval: 5000,

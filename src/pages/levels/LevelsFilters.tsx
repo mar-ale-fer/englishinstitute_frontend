@@ -13,11 +13,7 @@ import {
   Button, 
 } from '@material-ui/core';
 
-const validation_schema = Yup.object({
-  name: Yup.string()
-    .min(2, 'Debe tener más de 2 caracteres')
-    .required('Requerido'),
-});
+const validation_schema = Yup.object({});
   
 const LevelsFilters = () =>  {
 
@@ -28,12 +24,9 @@ const LevelsFilters = () =>  {
 
   const { data:levelsFiltersData } = useQuery(GET_LEVELSFILTERS_RV);  
   useEffect(() => {
-    log.debug('---1')
-    log.debug(levelsFiltersData)
-    log.debug('---2')
-    if(levelsFiltersData) {
+    if(levelsFiltersData && levelsFiltersData.levelsFilters_RV) {
       const initial_values={
-          name: levelsFiltersData,
+          name: levelsFiltersData.levelsFilters_RV,
           general: ''
       } 
       sets_initialvalue(initial_values);
@@ -41,9 +34,7 @@ const LevelsFilters = () =>  {
   },[levelsFiltersData])
   
   const deleteLevelsFilters = () => {
-    log.debug('deleteLevelsFilters')
-    log.debug(levelsFilters_RV())
-    levelsFilters_RV("dddfd")
+    levelsFilters_RV("")
   }
   return (
     <Formik
