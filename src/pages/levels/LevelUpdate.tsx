@@ -102,7 +102,7 @@ const LevelUpdatePage = () =>  {
 
           <div style={{ color: 'red' }}>{props.errors.general}</div>
           <Button variant="contained" color="primary" disabled={loading} type="submit">
-            Modificar aplicación
+            Modificar nivel
           </Button>
           <Button variant="contained" color="primary" type="submit"
             onClick={GoBackToLevels}
