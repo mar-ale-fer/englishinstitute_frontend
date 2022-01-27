@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import { UserCard } from './UserCard';
 import { USERS_QUERY } from './operations/UsersQuery';
 import UsersFilters from './UsersFilters';
+import * as log  from 'loglevel';
 const fabStyle = {
     position: 'absolute',
     bottom: 16,
@@ -16,19 +17,22 @@ const fabStyle = {
 
 const fabStyle_as_SxProps = fabStyle as SxProps;
 
-const LevelsPage = (props : any) => {
+const UsersPage = (props : any) => {
   let navigate = useNavigate();
   const { data:usersFiltersData } = useQuery(GET_USERSFILTERS_RV);  
   const { data, loading, error, refetch } = useQuery(
     USERS_QUERY,
     {variables: {
-      firstName: usersFiltersData.firstName,
-      lastName: usersFiltersData.lastName,
-      email: usersFiltersData.email,
+      firstName: usersFiltersData.usersFilters_RV.firstName,
+      lastName: usersFiltersData.usersFilters_RV.lastName,
+      email: usersFiltersData.usersFilters_RV.email,
       debug: usersPageNeedsRefresh_RV(),
       },
-    pollInterval: 5000,
+    pollInterval: 10000,
     });
+  
+  log.debug('--------1')
+  log.debug(usersFiltersData)
 
   const GoToCreateUser = () =>{ 
     navigate('/user-create');
@@ -57,4 +61,4 @@ const LevelsPage = (props : any) => {
   </div>
 }
 
-export default LevelsPage
+export default UsersPage

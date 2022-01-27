@@ -12,10 +12,13 @@ export function UserCard( props : any) {
     <Card >
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
-          {props.user.id}
+          {props.user.email}
         </Typography>
         <Typography variant="h6" component="h3">
-          {props.user.name}
+          {props.user.firstName}
+        </Typography>
+        <Typography variant="h6" component="h3">
+          {props.user.lastName}
         </Typography>
       </CardContent>
       <CardActions>
