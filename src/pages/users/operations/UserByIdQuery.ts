@@ -9,6 +9,7 @@ query UserById($userByIdId: ID!, $debug: String!) {
       id
       firstName
       lastName
+      email
       roles {
         roles
       }

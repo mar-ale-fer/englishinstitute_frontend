@@ -13,7 +13,7 @@ const options = [
     {label:'Profesor/a', value:'TEACHER'}
 ]
 
-export type userForm = usersFiltersType &
+type userForm = usersFiltersType &
                 {
                     password:string,
                     mustChangePassword: boolean
@@ -21,6 +21,7 @@ export type userForm = usersFiltersType &
                     general:string
                 }
 
+export type userUpdateForm =  Omit<userForm, "password"|"mustChangePassword"> 
 const validation_schema = Yup.object({
     firstName: Yup.string()
     .min(2, 'Debe tener más de 2 caracteres')
@@ -31,9 +32,6 @@ const validation_schema = Yup.object({
     email: Yup.string()
     .email('Formato de email inválido')
     .required('Requerido'),
-    password: Yup.string()
-    .min(6, 'Debe tener más de 6 caracteres')
-    .required('Requerido'),
     roles: Yup.array()
     .min(1,"Debe asignar al menos un rol")
     .max(3,"No puede asignar más de tres roles")
@@ -41,12 +39,12 @@ const validation_schema = Yup.object({
 })
 
 interface UserFormProps {
-    initial_values : userForm, 
-    handleSubmit : (values: userForm , actions: FormikHelpers<userForm>) => void,
+    initial_values : userUpdateForm, 
+    handleSubmit : (values: userUpdateForm , actions: FormikHelpers<userUpdateForm>) => void,
     loading :boolean,
     button_label: string
 }
-export const UserForm = ( {
+export const UserUpdateForm = ( {
     initial_values,
     handleSubmit,
     loading,
@@ -104,28 +102,6 @@ export const UserForm = ( {
                     />
                     {props.touched.email && props.errors.email ?
                     (<div>{props.errors.email}</div>) : null} 
-
-                    <Field 
-                        type="password"
-                        onChange={props.handleChange}
-                        onBlur={props.handleBlur}
-                        value={props.values.password}
-                        name="password"
-                        placeholder="Password"
-                        component={TextField}
-                    />                    
-                    {props.touched.password && props.errors.password ?
-                    (<div>{props.errors.password}</div>) : null} 
-
-                    <label>
-                    <Field 
-                        type="checkbox" 
-                        onChange={props.handleChange}
-                        onBlur={props.handleBlur}
-                        name="mustChangePassword"  
-                    />
-                        ¿Cambiar la clave en primer ingreso?
-                    </label>
 
                     <FormControl component="fieldset" style={{ display: "flex"}}>
                         <FormGroup>

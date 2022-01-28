@@ -23,6 +23,8 @@ import LevelUpdatePage from "../../pages/levels/LevelUpdate"
 
 import UsersPage from "../../pages/users/UsersPage";
 import UserCreatePage from "../../pages/users/UserCreatePage";
+import UserUpdatePage from "../../pages/users/UserUpdatePage";
+
 import Login from "../../pages/access/Login"
 import institute_logo from '../../images/institute_logo.png';
 import { userSessionReactVar, userSessionReactVar_initialvalue } from '../../cache';
@@ -84,9 +86,6 @@ function AppBarInteraction({ classes, variant }) {
     ? getUserMenu(userSession.roles)
     : []
   log.debug('--------1')
-  log.debug(userSession)
-  log.debug(MenuItems)
-  log.debug('--------2')
   
   const toggleDrawer = () => {
     setDrawer(!drawer);
@@ -154,6 +153,7 @@ function AppBarInteraction({ classes, variant }) {
 
           <Route path='/user-create' exact element={<UserCreatePage />} />
           <Route path='/users' exact element={<UsersPage />} />
+          <Route path='/user-update/:entityid/:random' element={<UserUpdatePage />} />
           <Route path='/login' exact element={<Login />} /> 
           <Route path='/logout' exact element={
             <div>
