@@ -28,11 +28,8 @@ const UsersPage = (props : any) => {
       email: usersFiltersData.usersFilters_RV.email,
       debug: usersPageNeedsRefresh_RV(),
       },
-    pollInterval: 10000,
+    // pollInterval: 5000,
     });
-  
-  log.debug('--------1')
-  log.debug(usersFiltersData)
 
   const GoToCreateUser = () =>{ 
     navigate('/user-create');
@@ -56,6 +53,7 @@ const UsersPage = (props : any) => {
     >
       <AddIcon />
     </Fab>
+    -{usersPageNeedsRefresh_RV()}=
     <UsersFilters />
     {Cards }
   </div>

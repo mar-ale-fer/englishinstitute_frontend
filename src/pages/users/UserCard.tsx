@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import UserDelete from './UserDelete'
+import UserChangePassword from './UserChangePassword';
 
 export function UserCard( props : any) {
   return (
@@ -29,6 +30,7 @@ export function UserCard( props : any) {
         <Button size="small"><EditIcon /></Button>
       </Link>
       <UserDelete userId= {props.user.id} />
+      <UserChangePassword entityId={props.user.id} />
       </CardActions>
     </Card>
   );

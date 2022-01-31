@@ -31,11 +31,7 @@ const UserUpdatePage = () => {
             debug: random
         }}
     )
-    log.debug('--------2--'+entityid)
-    log.debug('--------2.5--'+JSON.stringify(datauser))
 
-
-    
     useEffect(()=> {
         if (datauser && datauser.userById && datauser.userById.user) {
             const user = datauser.userById.user
@@ -48,7 +44,6 @@ const UserUpdatePage = () => {
                 roles: user.roles.roles,
                 general:""                
             }
-            log.debug('--------3--'+JSON.stringify(initial_values))
             sets_initialvalue(initial_values);
         }
     },[datauser])
@@ -66,7 +61,12 @@ const UserUpdatePage = () => {
         .then((data)=>{
             const response: any = data.data.userUpdate
             if((response.success) as boolean) {
-                usersPageNeedsRefresh_RV( Math.random().toString(36) as string)
+            
+                const randomString= Math.random().toString(36) as string
+                log.debug('--------1')
+                log.debug(randomString)
+
+                // usersPageNeedsRefresh_RV( randomString)
                 navigate('/users')
             } else {
                 alert(response.message)
