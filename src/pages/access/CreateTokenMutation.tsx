@@ -7,6 +7,13 @@ mutation CredentialsCreateToken($user: String!, $password: String!) {
     success
     message
     token
+    user {
+      id
+      firstName
+      lastName
+      email
+      mustChangePassword
+    }
   }
 }
 `;

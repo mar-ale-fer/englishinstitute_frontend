@@ -1,8 +1,8 @@
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { TextField, CheckboxWithLabel  } from 'formik-material-ui';
-import { Button, FormGroup, FormControl } from '@material-ui/core';
-
+// import { Button, FormGroup, FormControl, Grid } from '@material-ui/core';
+import { Button, Grid } from '@mui/material';
 export type userChangePasswordForm = {
     password:string
     passwordConfirmation: string
@@ -75,38 +75,44 @@ export const UserChangePasswordForm = ( {
         >
             {props =>(
                 <Form onSubmit={props.handleSubmit}>
-                    <Field 
-                        type="password"
-                        onChange={props.handleChange}
-                        onBlur={props.handleBlur}
-                        value={props.values.password}
-                        name="password"
-                        placeholder="password"
-                        component={TextField}
-                    />
-                    {props.touched.password && props.errors.password ?
-                    (<div>{props.errors.password}</div>) : null}     
-
-                    <Field 
-                        type="password"
-                        onChange={props.handleChange}
-                        onBlur={props.handleBlur}
-                        value={props.values.passwordConfirmation}
-                        name="passwordConfirmation"
-                        placeholder="repita el password"
-                        component={TextField}
-                    />
-                    {props.touched.passwordConfirmation && props.errors.passwordConfirmation ?
-                    (<div>{props.errors.passwordConfirmation}</div>) : null}   
-
-                    <Button variant="contained" color="primary" disabled={loading} type="submit">
-                        {button_label}
-                    </Button>
-                    <Button variant="contained" color="primary" onClick={()=>visibility()} type="submit">
-                        Cancelar
-                    </Button>
-                    <h3>Values</h3>
-                    <pre>{JSON.stringify(props.values)}</pre>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Field 
+                                type="password"
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                                value={props.values.password}
+                                name="password"
+                                placeholder="password"
+                                component={TextField}
+                            />    
+                            {props.touched.password && props.errors.password ?
+                            (<div>{props.errors.password}</div>) : null}                                                         
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Field 
+                                type="password"
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                                value={props.values.passwordConfirmation}
+                                name="passwordConfirmation"
+                                placeholder="repita el password"
+                                component={TextField}
+                            />
+                            {props.touched.passwordConfirmation && props.errors.passwordConfirmation ?
+                            (<div>{props.errors.passwordConfirmation}</div>) : null}                               
+                        </Grid>
+                        <Grid item xs ={12}>
+                            <Button variant="contained" color="primary" disabled={loading} type="submit">
+                                {button_label}
+                            </Button>
+                        </Grid>
+                        <Grid item xs ={12}>
+                            <Button variant="contained" color="primary" onClick={()=>visibility()} type="submit">
+                                Cancelar
+                            </Button>                            
+                        </Grid>
+                    </Grid>
                 </Form>
             )}
         </Formik>

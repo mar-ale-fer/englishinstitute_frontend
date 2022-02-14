@@ -29,6 +29,7 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "react-select": "^5.2.1",
+    "tslib": "^1.14.1",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
   },

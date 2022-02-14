@@ -1,6 +1,11 @@
 import { useState, Fragment } from "react";
+
+import { useQuery } from "@apollo/client";
+import { GET_USER_FROM_TOKEN_RV } from "./userSessionReactVarQuery";
+
+import { LOGGED_USER } from "./LoggedUserQuery";
 import clsx from "clsx";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Routes, Navigate } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import MenuIcon from '@mui/icons-material/Menu';
 import { withStyles } from "@material-ui/core/styles";
@@ -17,7 +22,7 @@ import {
 } from '@mui/material';
 import InstituteCreate from "../../pages/institute/InstituteCreate";
 
-import LevelsPage from "../../pages/levels/LevelsPage";
+import {LevelsPage} from "../../pages/levels/LevelsPage";
 import LevelCreatePage from "../../pages/levels/LevelCreatePage"
 import LevelUpdatePage from "../../pages/levels/LevelUpdate"
 
@@ -26,6 +31,7 @@ import UserCreatePage from "../../pages/users/UserCreatePage";
 import UserUpdatePage from "../../pages/users/UserUpdatePage";
 
 import Login from "../../pages/access/Login"
+import ChangePassword from "../../pages/access/ChangePasswordPage";
 import institute_logo from '../../images/institute_logo.png';
 import { userSessionReactVar, userSessionReactVar_initialvalue } from '../../cache';
 import { getUserMenu } from "./userMenu";
@@ -75,9 +81,12 @@ const MyToolbar = withStyles(styles)(({ classes, title, onMenuClick }) => (
     <div className={classes.toolbarMargin} />
   </Fragment>
 ));
-
-
-function AppBarInteraction({ classes, variant }) {
+  
+function AppBarInteraction({ 
+  classes,
+  variant,
+  user_from_token
+}) {
   const [drawer, setDrawer] = useState(false);
   const [title, setTitle] = useState("Institute App");
 
@@ -96,6 +105,41 @@ function AppBarInteraction({ classes, variant }) {
     setDrawer(variant === "temporary" ? false : drawer);
     setDrawer(!drawer);
   };
+
+  const RequireAuth = ( props ) => {
+    const { data: user_from_token_data, loading } = useQuery(
+      GET_USER_FROM_TOKEN_RV
+    );
+
+    // return <div>aaa</div>
+    if (user_from_token_data &&
+      user_from_token_data &&
+      user_from_token_data.userSessionReactVar &&
+      user_from_token_data.userSessionReactVar.email) {
+        return < AppCheckPassword toRender={props.children} />
+    } 
+    return <Navigate to={'/login'} />
+  }
+
+
+  const AppCheckPassword = ( props ) => {
+    const { data: loggeduserdata, loading, error } = useQuery(LOGGED_USER,
+       {fetchPolicy: "network-only"});
+
+    // return (<div>{JSON.stringify(loggeduserdata)}</div>)
+
+    if (error) return <div style={{ color: "red" }}>{error.message}</div>;
+    if (!loggeduserdata) return <p> No hay información sobre la sesión </p>;
+    if (loading) return <p>verificando su sesión...</p>;
+  
+    const loggeduser = loggeduserdata.LoggedUser;
+    if (loggeduser.success === false)
+      return <div style={{ color: "red" }}>{loggeduser.message}</div>;
+  
+    if (loggeduser.user.mustChangePassword) 
+      return (<Navigate to='/change-password' />)
+    return props.toRender
+  }
 
   const MyDrawer = withStyles(styles)(
     ({ classes, variant, open, onClose, onItemClick }) => (
@@ -132,7 +176,11 @@ function AppBarInteraction({ classes, variant }) {
   
           <Typography variant="h6" >
             NQN Institute
-          </Typography>        
+          </Typography>    
+          <div>
+            {JSON.stringify(user_from_token)}-
+            {JSON.stringify(localStorage.getItem('token'))}
+            </div> 
         </Drawer>
   
    
@@ -146,15 +194,21 @@ function AppBarInteraction({ classes, variant }) {
             </div>
           }>
           </Route>
-          <Route path='/create-institute' exact element={<InstituteCreate />}/>
-          <Route path='/level-create' exact element={<LevelCreatePage />} /> 
-          <Route path='/levels' exact element={<LevelsPage />} /> 
-          <Route path='/level-update/:entityid/:random' element={<LevelUpdatePage />} />
+          <Route path='/create-institute' exact element={
+          <RequireAuth>
+            <InstituteCreate />
+          </RequireAuth>
+          }/>
+          <Route path='/level-create' exact element={
+          <RequireAuth><LevelCreatePage /></RequireAuth>} /> 
+          <Route path='/levels' exact element={<RequireAuth><LevelsPage /></RequireAuth>} /> 
+          <Route path='/level-update/:entityid/:random' element={<RequireAuth><LevelUpdatePage /></RequireAuth>} />
 
-          <Route path='/user-create' exact element={<UserCreatePage />} />
-          <Route path='/users' exact element={<UsersPage />} />
-          <Route path='/user-update/:entityid/:random' element={<UserUpdatePage />} />
+          <Route path='/user-create' exact element={<RequireAuth><UserCreatePage /></RequireAuth>} />
+          <Route path='/users' exact element={<RequireAuth><UsersPage /></RequireAuth>} />
+          <Route path='/user-update/:entityid/:random' element={<RequireAuth><UserUpdatePage /></RequireAuth>} />
           <Route path='/login' exact element={<Login />} /> 
+          <Route path='/change-password' exact element={<ChangePassword />} /> 
           <Route path='/logout' exact element={
             <div>
               <Button

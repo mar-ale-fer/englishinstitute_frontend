@@ -9,6 +9,7 @@ import { UserCard } from './UserCard';
 import { USERS_QUERY } from './operations/UsersQuery';
 import UsersFilters from './UsersFilters';
 import * as log  from 'loglevel';
+import { Grid } from '@mui/material';
 const fabStyle = {
     position: 'absolute',
     bottom: 16,
@@ -40,9 +41,9 @@ const UsersPage = (props : any) => {
   if (!data) return <p> No hay usuarios</p>;
   if (loading) return <p>Cargando usuarios...</p>;
    const Cards =  data.users.users.map(( user: any ) => (
-    <div key={user.id} style={{ display: "inline-block" }}>
+    <Grid key={user.id} item xs={3}>
       <UserCard user={user}/>
-    </div>
+    </Grid>
   ));
   return  <div>
     <Fab sx= {fabStyle_as_SxProps} 
@@ -53,9 +54,11 @@ const UsersPage = (props : any) => {
     >
       <AddIcon />
     </Fab>
-    -{usersPageNeedsRefresh_RV()}=
     <UsersFilters />
-    {Cards }
+    <Grid container>
+      {Cards }      
+    </Grid>
+
   </div>
 }
 

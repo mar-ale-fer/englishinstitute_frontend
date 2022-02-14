@@ -8,15 +8,13 @@ import { useQuery } from '@apollo/client';
 import { LevelCard } from './LevelCard';
 import { LEVELS_QUERY } from './operations/LevelsQuery';
 import LevelsFilters from './LevelsFilters';
-const fabStyle = {
-    position: 'absolute',
-    bottom: 16,
-    right: 16,
-  };
+import { Theme,  } from '@mui/material';
+import { StyleRulesCallback, WithStyles, withStyles } from '@mui/styles';
 
-const fabStyle_as_SxProps = fabStyle as SxProps;
 
-const LevelsPage = (props : any) => {
+
+const LevelsPage_ = (props : LevelsPageProps) => {
+  const { classes } = props;
   let navigate = useNavigate();
   const { data:levelsFiltersData } = useQuery(GET_LEVELSFILTERS_RV);  
   const { data, loading, error, refetch } = useQuery(
@@ -41,18 +39,36 @@ const LevelsPage = (props : any) => {
       <LevelCard level={level}/>
     </div>
   ));
-  return  <div>
-    <Fab sx= {fabStyle_as_SxProps} 
-        size="small" 
-        color="secondary" 
-        aria-label="add"
-        onClick={GoToCreateLevel}
-    >
-      <AddIcon />
-    </Fab>
-    <LevelsFilters />
-    {Cards }
-  </div>
+  return <div className={classes.root}>
+      <LevelsFilters />
+      <Fab sx= {fabStyle_as_SxProps} 
+          size="small" 
+          color="secondary" 
+          aria-label="add"
+          onClick={GoToCreateLevel}
+      >
+        <AddIcon/>
+      </Fab>
+      {Cards }
+
+    </div>
 }
 
-export default LevelsPage
+const fabStyle = {
+  position: "absolute",
+  bottom: 20,
+  right: 20
+};
+
+const fabStyle_as_SxProps = fabStyle as SxProps;
+
+const styles = (theme: Theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+});
+
+interface LevelsPageProps extends WithStyles<typeof styles> {
+  data? : any
+}
+export const LevelsPage = withStyles(styles)(LevelsPage_)

@@ -7,54 +7,40 @@ import { userSessionReactVar } from "../../cache";
 import { getUserFromToken } from "./sessionToken";
 import { Typography, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-
-import { CREATE_LOGIN_TOKEN } from "./CreateTokenMutation";
+import { USER_CHANGE_OWN_PASSWORD } from "../users/operations/UserChangeOwnPasswordMutation";
 
 const esquema_validacion = Yup.object({
-  username: Yup.string()
-    .min(5, "Debe tenér más de 5 caracteres")
-    .required("Requerido"),
   password: Yup.string()
-    .min(6, "Debe tener más de 6 caracteres")
-    .required("Requerido"),
+  .min(8, 'Debe tener al menos 8 caracteres')
+  .required('Requerido'),
+  passwordConfirmation: Yup.string()
+  .oneOf([Yup.ref('password')], 'Las claves deben coincidir')
 });
 
-const Login = () => {
-  const [CredentialsCreateToken, { loading }] = useMutation(CREATE_LOGIN_TOKEN);
+const ChangePasswordPage = () => {
+  const [userOwnChangePassword, { loading }] = useMutation(USER_CHANGE_OWN_PASSWORD);
   let navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{
-        username: "",
         password: "",
+        passwordConfirmation:"",
         general: "", //a virtual property for errors handling
       }}
       onSubmit={(values, actions) => {
-        CredentialsCreateToken({
+        userOwnChangePassword({
           variables: {
-            user: values.username,
             password: values.password,
           },
         })
           .then((data) => {
             console.log(data);
-            console.log(data.data.credentialsCreateToken);
-            const authresponse: any = data.data.credentialsCreateToken;
+            console.log(data.data.userOwnChangePassword);
+            const authresponse: any = data.data.userOwnChangePassword;
             if (authresponse.success) {
-              const token: string = authresponse.token;
-              localStorage.setItem("token", token);
-              //extract users session and save in the apollo cache
-              userSessionReactVar(getUserFromToken(token));
-              console.log("---user2:");
-              console.log(authresponse.user);
-              console.log(authresponse.user.mustChangePassword);
-              if (authresponse.user.mustChangePassword) {
-                alert("A continuación debe cambiar su password");
-                navigate("/change-password");
-              } else {
-                alert("Sesión iniciada");
-                navigate("/");
-              }
+              alert("Cambiaste correctamente tu password");
+              navigate("/");
             } else {
               actions.setFieldError("general", authresponse.message);
             }
@@ -73,30 +59,28 @@ const Login = () => {
         <div>
           <Form onSubmit={props.handleSubmit}>
             <Field
-              type="text"
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.username}
-              name="username"
-              placeholder="email"
-              component={TextField}
-            />
-            {props.touched.username && props.errors.username ? (
-              <div>{props.errors.username}</div>
-            ) : null}
-            <Field
               type="password"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
               value={props.values.password}
               name="password"
               placeholder="password"
-              autoComplete="current-password"
-              id="current-password"
               component={TextField}
             />
             {props.touched.password && props.errors.password ? (
               <div>{props.errors.password}</div>
+            ) : null}
+            <Field
+              type="password"
+              onChange={props.handleChange}
+              onBlur={props.handleBlur}
+              value={props.values.passwordConfirmation}
+              name="passwordConfirmation"
+              placeholder="passwordConfirmation"
+              component={TextField}
+            />
+            {props.touched.passwordConfirmation && props.errors.passwordConfirmation ? (
+              <div>{props.errors.passwordConfirmation}</div>
             ) : null}
             <div style={{ color: "red" }}>{props.errors.general}</div>
             <Button
@@ -106,7 +90,7 @@ const Login = () => {
               // onClick={submitForm}
               type="submit"
             >
-              Iniciar la sesión{" "}
+              Cambiar password{" "}
             </Button>
           </Form>
           <Typography>
@@ -118,4 +102,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ChangePasswordPage;

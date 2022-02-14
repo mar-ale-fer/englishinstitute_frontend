@@ -1,3 +1,4 @@
+import React from 'react'
 import { render } from 'react-dom'
 import './index.css';
 import App from './components/App';
@@ -5,7 +6,8 @@ import { ApolloClient, createHttpLink, NormalizedCacheObject,ApolloProvider } fr
 import { setContext } from '@apollo/client/link/context';
 import { cache } from './cache';
 import * as log  from 'loglevel';
-
+import { userSessionReactVar } from "./cache"
+import { getUserFromToken} from './pages/access/sessionToken'
 log.setLevel(process.env.REACT_APP_LOG_LEVEL ? process.env.REACT_APP_LOG_LEVEL as log.LogLevelDesc: "ERROR", true)
 
 
@@ -27,13 +29,22 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 
+const SaveTokenInCache = (  ) => {
+  const token = localStorage.getItem('token')
+  if (token)  userSessionReactVar(getUserFromToken(token));
+  return <App />
+}
+
 export const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
   link: authLink.concat(httpLink),
 });
+
+
+
 render(
   <ApolloProvider client={client}>
-    <App />
+    <SaveTokenInCache />
   </ApolloProvider>
 ,
   document.getElementById('root')
