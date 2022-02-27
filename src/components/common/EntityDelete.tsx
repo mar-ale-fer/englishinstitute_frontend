@@ -37,6 +37,8 @@ const EntityDelete = ( props: UserDeleteProps) => {
         case 'level': 
           return { levelDeleteId: props.entityId }
 
+        case 'student': 
+          return { studentDeleteId: props.entityId }
       }
     }
     const entityResponse = (entity : entityType, data : any) => {
@@ -45,6 +47,8 @@ const EntityDelete = ( props: UserDeleteProps) => {
           return data.data.userDelete
         case 'level': 
           return data.data.levelDelete
+          case 'student': 
+          return data.data.studentDelete
       }
     }
 

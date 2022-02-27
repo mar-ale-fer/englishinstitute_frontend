@@ -30,6 +30,10 @@ import UsersPage from "../../pages/users/UsersPage";
 import UserCreatePage from "../../pages/users/UserCreatePage";
 import UserUpdatePage from "../../pages/users/UserUpdatePage";
 
+import StudentsPage from "../../pages/students/StudentPage";
+import StudentCreatePage from "../../pages/students/StudentCreatePage";
+import StudentUpdatePage from "../../pages/students/StudentUpdate";
+
 import Login from "../../pages/access/Login"
 import ChangePassword from "../../pages/access/ChangePasswordPage";
 import institute_logo from '../../images/institute_logo.png';
@@ -207,6 +211,11 @@ function AppBarInteraction({
           <Route path='/user-create' exact element={<RequireAuth><UserCreatePage /></RequireAuth>} />
           <Route path='/users' exact element={<RequireAuth><UsersPage /></RequireAuth>} />
           <Route path='/user-update/:entityid/:random' element={<RequireAuth><UserUpdatePage /></RequireAuth>} />
+          
+          <Route path='/student-create' exact element={<RequireAuth><StudentCreatePage /></RequireAuth>} />
+          <Route path='/students' exact element={<RequireAuth><StudentsPage /></RequireAuth>} />
+          <Route path='/student-update/:entityid/:random' element={<RequireAuth><StudentUpdatePage /></RequireAuth>} />
+
           <Route path='/login' exact element={<Login />} /> 
           <Route path='/change-password' exact element={<ChangePassword />} /> 
           <Route path='/logout' exact element={
