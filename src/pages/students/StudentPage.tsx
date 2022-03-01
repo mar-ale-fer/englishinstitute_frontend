@@ -8,7 +8,6 @@ import { useQuery } from '@apollo/client';
 import { StudentCard } from './StudentCard';
 import { STUDENTS_QUERY } from './operations/StudentsQuery';
 import StudentsFilters from './StudentsFilters';
-import * as log  from 'loglevel';
 import { Grid } from '@mui/material';
 const fabStyle = {
     position: 'absolute',
@@ -22,7 +21,7 @@ const StudentsPage = (props : any) => {
   let navigate = useNavigate();
   const { data:studentsFiltersData } = useQuery(GET_STUDENTFILTERS_RV);
 
-  const { data, loading, error, refetch } = useQuery(
+  const { data, loading, error } = useQuery(
     STUDENTS_QUERY,
     {variables: {
       firstName: studentsFiltersData.studentsFilters_RV.firstName,

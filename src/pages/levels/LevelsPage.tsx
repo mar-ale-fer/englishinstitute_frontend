@@ -9,7 +9,7 @@ import { LevelCard } from './LevelCard';
 import { LEVELS_QUERY } from './operations/LevelsQuery';
 import LevelsFilters from './LevelsFilters';
 import { Theme,  } from '@mui/material';
-import { StyleRulesCallback, WithStyles, withStyles } from '@mui/styles';
+import { WithStyles, withStyles } from '@mui/styles';
 
 
 
@@ -17,13 +17,13 @@ const LevelsPage_ = (props : LevelsPageProps) => {
   const { classes } = props;
   let navigate = useNavigate();
   const { data:levelsFiltersData } = useQuery(GET_LEVELSFILTERS_RV);  
-  const { data, loading, error, refetch } = useQuery(
+  const { data, loading, error } = useQuery(
     LEVELS_QUERY,
     {variables: {
       name: levelsFiltersData.levelsFilters_RV,
       debug: levelsPageNeedsRefresh_RV(),
       },
-    pollInterval: 5000,
+    // pollInterval: 5000,
     });
 
   const GoToCreateLevel = () =>{ 

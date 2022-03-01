@@ -1,6 +1,6 @@
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import { TextField, CheckboxWithLabel  } from 'formik-material-ui';
+import { TextField } from 'formik-material-ui';
 // import { Button, FormGroup, FormControl, Grid } from '@material-ui/core';
 import { Button, Grid } from '@mui/material';
 export type userChangePasswordForm = {

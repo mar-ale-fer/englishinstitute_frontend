@@ -34,21 +34,26 @@ ROLE_ACCESSES.set(
 
 ROLE_ACCESSES.set(
     "SECRETARY", [
-    {
-        to: "/students",
-        title: "Estudiantes",
-        optionText: "Estudiantes"
-    },
-    {
-        to: "/teachers",
-        title: "Profesores",
-        optionText: "Profesores"
-    },
+    // {
+    //     to: "/students",
+    //     title: "Estudiantes",
+    //     optionText: "Estudiantes"
+    // },
+    // {
+    //     to: "/teachers",
+    //     title: "Profesores",
+    //     optionText: "Profesores"
+    // },
     {
         to: "/levels",
         title: "Niveles",
         optionText: "Niveles"
     },
+    {
+        to: "/courses",
+        title: "Cursos",
+        optionText: "Cursos"
+    }
 ]
 )
 

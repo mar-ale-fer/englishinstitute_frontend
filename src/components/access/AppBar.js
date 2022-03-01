@@ -34,12 +34,15 @@ import StudentsPage from "../../pages/students/StudentPage";
 import StudentCreatePage from "../../pages/students/StudentCreatePage";
 import StudentUpdatePage from "../../pages/students/StudentUpdate";
 
+import CoursesPage from "../../pages/courses/CoursePage";
+import CourseCreatePage from "../../pages/courses/CourseCreatePage";
+import CourseUpdatePage from "../../pages/courses/CourseUpdate";
+
 import Login from "../../pages/access/Login"
 import ChangePassword from "../../pages/access/ChangePasswordPage";
 import institute_logo from '../../images/institute_logo.png';
 import { userSessionReactVar, userSessionReactVar_initialvalue } from '../../cache';
 import { getUserMenu } from "./userMenu";
-import * as log  from 'loglevel';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -98,7 +101,6 @@ function AppBarInteraction({
   const MenuItems = (userSession && userSession.roles) 
     ? getUserMenu(userSession.roles)
     : []
-  log.debug('--------1')
   
   const toggleDrawer = () => {
     setDrawer(!drawer);
@@ -111,7 +113,7 @@ function AppBarInteraction({
   };
 
   const RequireAuth = ( props ) => {
-    const { data: user_from_token_data, loading } = useQuery(
+    const { data: user_from_token_data } = useQuery(
       GET_USER_FROM_TOKEN_RV
     );
 
@@ -211,7 +213,12 @@ function AppBarInteraction({
           <Route path='/user-create' exact element={<RequireAuth><UserCreatePage /></RequireAuth>} />
           <Route path='/users' exact element={<RequireAuth><UsersPage /></RequireAuth>} />
           <Route path='/user-update/:entityid/:random' element={<RequireAuth><UserUpdatePage /></RequireAuth>} />
+
           
+          <Route path='/course-create' exact element={<RequireAuth><CourseCreatePage /></RequireAuth>} />
+          <Route path='/courses' exact element={<RequireAuth><CoursesPage /></RequireAuth>} />
+          <Route path='/course-update/:entityid/:random' element={<RequireAuth><CourseUpdatePage /></RequireAuth>} />
+
           <Route path='/student-create' exact element={<RequireAuth><StudentCreatePage /></RequireAuth>} />
           <Route path='/students' exact element={<RequireAuth><StudentsPage /></RequireAuth>} />
           <Route path='/student-update/:entityid/:random' element={<RequireAuth><StudentUpdatePage /></RequireAuth>} />

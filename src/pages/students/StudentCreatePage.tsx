@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client';
 import { STUDENT_CREATE } from './operations/StudentCreateMutation';
-import { useNavigate } from 'react-router-dom';
 import { studentsPageNeedsRefresh_RV } from '../../cache';
 import { entityForm, StudentForm } from './StudentForm';
 
@@ -16,7 +15,6 @@ const initial_values : entityForm = {
 }
 
 const StudentCreatePage = () => {
-    let navigate = useNavigate()
     const [studentCreate, { loading }] = useMutation(STUDENT_CREATE);
 
     return (

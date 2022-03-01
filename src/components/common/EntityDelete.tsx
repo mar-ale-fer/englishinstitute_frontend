@@ -32,13 +32,16 @@ const EntityDelete = ( props: UserDeleteProps) => {
     const entityVars = (entity : entityType) => {
       switch (entity) {
         case 'user': 
-          return { userDeleteId: props.entityId }
+          return { userDeleteId: entityId }
 
         case 'level': 
-          return { levelDeleteId: props.entityId }
+          return { levelDeleteId: entityId }
 
         case 'student': 
-          return { studentDeleteId: props.entityId }
+          return { studentDeleteId: entityId }
+
+        case 'course':
+          return { courseDeleteId: entityId}
       }
     }
     const entityResponse = (entity : entityType, data : any) => {
@@ -47,8 +50,10 @@ const EntityDelete = ( props: UserDeleteProps) => {
           return data.data.userDelete
         case 'level': 
           return data.data.levelDelete
-          case 'student': 
+        case 'student': 
           return data.data.studentDelete
+        case 'course': 
+          return data.data.courseDelete
       }
     }
 

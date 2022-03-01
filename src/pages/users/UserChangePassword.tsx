@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { USER_CHANGE_PASSWORD } from './operations/UserChangePasswordMutation';
 import { UserChangePasswordForm, userChangePasswordForm } from './UserChangePasswordForm';
 import Button from '@mui/material/Button';

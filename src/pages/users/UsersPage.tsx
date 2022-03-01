@@ -8,7 +8,6 @@ import { useQuery } from '@apollo/client';
 import { UserCard } from './UserCard';
 import { USERS_QUERY } from './operations/UsersQuery';
 import UsersFilters from './UsersFilters';
-import * as log  from 'loglevel';
 import { Grid } from '@mui/material';
 const fabStyle = {
     position: 'absolute',
@@ -21,7 +20,7 @@ const fabStyle_as_SxProps = fabStyle as SxProps;
 const UsersPage = (props : any) => {
   let navigate = useNavigate();
   const { data:usersFiltersData } = useQuery(GET_USERSFILTERS_RV);  
-  const { data, loading, error, refetch } = useQuery(
+  const { data, loading, error } = useQuery(
     USERS_QUERY,
     {variables: {
       firstName: usersFiltersData.usersFilters_RV.firstName,

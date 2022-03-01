@@ -2,6 +2,8 @@ import { InMemoryCache, makeVar } from "@apollo/client";
 import { userSessionType } from "./types/userSessionType";
 import { usersFiltersType } from "./pages/users/operations/UsersFiltersType";
 import { studentsFiltersType } from "./pages/students/operations/StudentsFiltersType";
+import { coursesFiltersType } from "./pages/courses/operations/CoursesFiltersType";
+
 export const cache: InMemoryCache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -27,7 +29,12 @@ export const cache: InMemoryCache = new InMemoryCache({
         studentsPageNeedsRefresh_RV:{
           read() { return usersPageNeedsRefresh_RV()}
         },
-
+        coursesFilters_RV:{
+          read() { return coursesFilters_RV()}
+        },
+        coursesPageNeedsRefresh_RV:{
+          read() { return coursesPageNeedsRefresh_RV()}
+        }
       }
     }
   }
@@ -53,7 +60,7 @@ export const usersFilters_RV_initialvalue : usersFiltersType = {
 }
 export const usersFilters_RV = makeVar<usersFiltersType>(usersFilters_RV_initialvalue);
 export const usersPageNeedsRefresh_RV = makeVar<string>("");
-
+//students
 export const studentsFilters_RV_initialvalue : studentsFiltersType = {
   firstName: "",
   lastName: "",
@@ -63,3 +70,13 @@ export const studentsFilters_RV_initialvalue : studentsFiltersType = {
 }
 export const studentsFilters_RV = makeVar<studentsFiltersType>(studentsFilters_RV_initialvalue)
 export const studentsPageNeedsRefresh_RV = makeVar<string>("");
+//courses
+export const coursesFilters_RV_initialvalue : coursesFiltersType = {
+  year: 2022,
+  schedule: "",
+  details: "",
+  levelId: "0",
+  active: true,
+}
+export const coursesFilters_RV = makeVar<coursesFiltersType>(coursesFilters_RV_initialvalue)
+export const coursesPageNeedsRefresh_RV = makeVar<string>("");

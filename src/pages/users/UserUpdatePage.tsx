@@ -63,10 +63,7 @@ const UserUpdatePage = () => {
             if((response.success) as boolean) {
             
                 const randomString= Math.random().toString(36) as string
-                log.debug('--------1')
-                log.debug(randomString)
-
-                // usersPageNeedsRefresh_RV( randomString)
+                usersPageNeedsRefresh_RV( randomString)
                 navigate('/users')
             } else {
                 alert(response.message)
