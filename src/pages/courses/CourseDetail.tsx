@@ -159,12 +159,12 @@ const CourseDetail = () =>  {
       <ArrowBackIosNewIcon />
     </Fab>    
     <Box sx={{ width: '100%', maxWidth: 1000 }}>  
-      {/* <Typography variant="h6" gutterBottom component="div">
-        {data.userById.user.code} | {data.userById.user.code2}
+      <Typography variant="h6" gutterBottom component="div">
+        {dataCourse.courseById.course.level.name}
       </Typography>
       <Typography variant="h5" gutterBottom component="div">
-        {data.userById.user.firstName} {data.userById.user.lastName}
-      </Typography> */}
+      {dataCourse.courseById.course.details}
+      </Typography>
 
       <Stack direction="row" spacing={2}> 
         <Box component="span" sx={{ p: 2, border: '1px dashed grey' }}>
