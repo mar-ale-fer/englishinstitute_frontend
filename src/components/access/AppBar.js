@@ -37,6 +37,7 @@ import StudentUpdatePage from "../../pages/students/StudentUpdate";
 import CoursesPage from "../../pages/courses/CoursePage";
 import CourseCreatePage from "../../pages/courses/CourseCreatePage";
 import CourseUpdatePage from "../../pages/courses/CourseUpdate";
+import CourseDetail from "../../pages/courses/CourseDetail";
 
 import Login from "../../pages/access/Login"
 import ChangePassword from "../../pages/access/ChangePasswordPage";
@@ -218,6 +219,7 @@ function AppBarInteraction({
           <Route path='/course-create' exact element={<RequireAuth><CourseCreatePage /></RequireAuth>} />
           <Route path='/courses' exact element={<RequireAuth><CoursesPage /></RequireAuth>} />
           <Route path='/course-update/:entityid/:random' element={<RequireAuth><CourseUpdatePage /></RequireAuth>} />
+          <Route path='/course-detail/:entityid/:random' element={<RequireAuth><CourseDetail /></RequireAuth>} />
 
           <Route path='/student-create' exact element={<RequireAuth><StudentCreatePage /></RequireAuth>} />
           <Route path='/students' exact element={<RequireAuth><StudentsPage /></RequireAuth>} />

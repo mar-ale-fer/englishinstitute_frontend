@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import CourseDelete from './CourseDelete';
+import SettingsIcon from '@mui/icons-material/Settings';
+
 import { Grid } from '@mui/material';
 
 export function CourseCard( props : any) {
@@ -44,6 +46,12 @@ export function CourseCard( props : any) {
                 <Button size="small"><EditIcon /></Button>
               </Link>          
             </Grid>
+            <Link
+              to={`/course-detail/${props.course.id}/${Math.random().toString(36).replace(/[^a-z]+/g, '')}`}
+              key={'course_detail_'+props.course.id}
+            >
+              <Button size="small"><SettingsIcon /></Button>
+            </Link>
             <Grid item xs={6}>
                 <CourseDelete courseId= {props.course.id} />        
             </Grid>

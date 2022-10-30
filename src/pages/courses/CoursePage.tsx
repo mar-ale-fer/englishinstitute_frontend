@@ -24,7 +24,7 @@ const CoursesPage = (props : any ) => {
     const { data, loading, error } = useQuery(
         COURSE_QUERY,
         {variables: {
-            year: coursesFiltersData.coursesFilters_RV.year,
+            year: Number(coursesFiltersData.coursesFilters_RV.year),
             schedule: coursesFiltersData.coursesFilters_RV.schedule,
             details: coursesFiltersData.coursesFilters_RV.details,
             levelId: coursesFiltersData.coursesFilters_RV.levelId,

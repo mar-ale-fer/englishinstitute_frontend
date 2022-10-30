@@ -16,7 +16,17 @@ query CourseById($courseByIdId: ID!, $debug: String!) {
         level {
           id
           name
-        }      
+        }
+        students {
+            id
+            firstName
+            lastName
+            dateOfBirth
+            documentNumber
+            email
+            observations
+            phoneNumber
+        }
       }
     }
   }
