@@ -5,10 +5,19 @@ import AddIcon from '@mui/icons-material/Add';
 import { SxProps } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { StudentCard } from './StudentCard';
+import { StudentRow } from './StudentRow';
 import { STUDENTS_QUERY } from './operations/StudentsQuery';
 import StudentsFilters from './StudentsFilters';
 import { Grid } from '@mui/material';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import Paper from '@mui/material/Paper';
+
 const fabStyle = {
     position: 'absolute',
     bottom: 16,
@@ -41,10 +50,9 @@ const StudentsPage = (props : any) => {
   if (error) return <div style={{ color: 'red' }}>{error.message}</div>;
   if (!data) return <p> No hay estudiantes</p>;
   if (loading) return <p>Cargando estudiantes...</p>;
-   const Cards =  data.students.students.map(( student: any ) => (
-    <Grid key={student.id} item xs={3}>
-      <StudentCard student={student}/>
-    </Grid>
+  console.log(data)
+   const Rows =  data.students.students.map(( student: any ) => (
+    <StudentRow key={student.id} student={student}/>
   ));
   return  <div>
     <Fab sx= {fabStyle_as_SxProps} 
@@ -57,7 +65,25 @@ const StudentsPage = (props : any) => {
     </Fab>
     <StudentsFilters />
     <Grid container>
-      {Cards }      
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+          <TableRow>
+              <TableCell>Acciones</TableCell>
+              <TableCell align="left">Apellido</TableCell>
+              <TableCell align="left">Nombre</TableCell>
+              <TableCell align="left">Email</TableCell>
+              <TableCell align="right">Documento</TableCell>
+              <TableCell align="left">Observaciones</TableCell>
+              <TableCell align="right">Teléfono</TableCell>
+              <TableCell align="right">Nacimiento</TableCell>
+          </TableRow>
+          </TableHead>
+          <TableBody>
+          {Rows}
+          </TableBody>
+      </Table>
+      </TableContainer>         
     </Grid>
 
   </div>

@@ -5,10 +5,20 @@ import AddIcon from '@mui/icons-material/Add';
 import { SxProps } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { CourseCard } from './CourseCard';
+import { CourseRow } from './CourseRow';
 import { COURSE_QUERY } from "./operations/CourseQuery";
 import CoursesFilters from "./CoursesFilters";
 import { Grid } from '@mui/material';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+
+import Paper from '@mui/material/Paper';
+
 const fabStyle = {
     position: 'absolute',
     bottom: 16,
@@ -41,10 +51,8 @@ const CoursesPage = (props : any ) => {
     if (!data) return <p> No hay cursos</p>;
     if (loading) return <p>Cargando cursos...</p>;
 
-    const Cards =  data.courses.courses.map(( course: any ) => (
-        <Grid key={course.id} item xs={3}>
-          <CourseCard course={course}/>
-        </Grid>
+    const Rows =  data.courses.courses.map(( course: any ) => (
+          <CourseRow key={course.id} course={course}/>
     ));
 
     return (
@@ -59,7 +67,24 @@ const CoursesPage = (props : any ) => {
             </Fab>
             <CoursesFilters />
             <Grid container>
-            {Cards }      
+                <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>Acciones</TableCell>
+                        <TableCell align="left">Nivel</TableCell>
+                        <TableCell align="left">Días y horarios</TableCell>
+                        <TableCell align="left">detalles</TableCell>
+                        <TableCell align="right">Valor</TableCell>
+                        <TableCell align="left">Estado</TableCell>
+                        <TableCell align="right">Año</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {Rows}
+                    </TableBody>
+                </Table>
+                </TableContainer>    
             </Grid>
         </div>
     )

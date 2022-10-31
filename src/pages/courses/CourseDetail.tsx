@@ -20,7 +20,6 @@ import StudentsFilters from '../students/StudentsFilters'
 import { studentsPageNeedsRefresh_RV } from '../../cache';
 import { coursesPageNeedsRefresh_RV } from "../../cache";
 import {GET_STUDENTFILTERS_RV} from '../students/operations/studentsFilters_rv_query'
-import { StudentCard } from '../students/StudentCard';
 import { STUDENTS_QUERY } from '../students/operations/StudentsQuery';
 import CourseAddStudent from './CourseAddStudent'
 import CourseRemoveStudent from './CourseRemoveStudent'
@@ -84,12 +83,6 @@ const CourseDetail = () =>  {
     if (errorCourse) return <div style={{ color: 'red' }}>{errorCourse.message}</div>;
     if (!dataCourse) return <p> No hay información sobre el curso</p>;
     if (loadingCourse) return <p>Cargando curso...</p>;
-
-     const Cards =  dataStudents.students.students.map(( student: any ) => (
-      <Grid key={student.id} item xs={3}>
-        <StudentCard student={student}/>
-      </Grid>
-    ));
 
     const StudentsList = () => {
 

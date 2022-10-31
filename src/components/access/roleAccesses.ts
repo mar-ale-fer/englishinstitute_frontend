@@ -14,47 +14,38 @@ ROLE_ACCESSES.set(
         title: "Niveles",
         optionText: "Niveles"
     },
-    {
-        to: "/currentaccounts",
-        title: "Cuentas corrientes",
-        optionText: "Cuentas corrientes"
-    },
+    // {
+    //     to: "/currentaccounts",
+    //     title: "Cuentas corrientes",
+    //     optionText: "Cuentas corrientes"
+    // },
 ]
 )
 
 ROLE_ACCESSES.set(
     "ADMINISTRATOR", [
-    {
-        to: "/currentaccounts",
-        title: "Cuentas corrientes",
-        optionText: "Cuentas corrientes"
-    },
+    // {
+    //     to: "/currentaccounts",
+    //     title: "Cuentas corrientes",
+    //     optionText: "Cuentas corrientes"
+    // },
 ]
 )
 
 ROLE_ACCESSES.set(
     "SECRETARY", [
-    {
-        to: "/students",
-        title: "Estudiantes",
-        optionText: "Estudiantes"
-    },
-    // {
-    //     to: "/teachers",
-    //     title: "Profesores",
-    //     optionText: "Profesores"
-    // },
-    {
-        to: "/levels",
-        title: "Niveles",
-        optionText: "Niveles"
-    },
-    {
-        to: "/courses",
-        title: "Cursos",
-        optionText: "Cursos"
-    }
-]
+        {
+            to: "/courses",
+            title: "Cursos",
+            optionText: "Cursos"
+        },
+        {
+            to: "/students",
+            title: "Estudiantes",
+            optionText: "Estudiantes"
+        },
+
+    ]
 )
 
 ROLE_ACCESSES.set(
