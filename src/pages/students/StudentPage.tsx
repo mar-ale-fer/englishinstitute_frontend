@@ -48,9 +48,8 @@ const StudentsPage = (props : any) => {
   };
 
   if (error) return <div style={{ color: 'red' }}>{error.message}</div>;
-  if (!data) return <p> No hay estudiantes</p>;
   if (loading) return <p>Cargando estudiantes...</p>;
-  console.log(data)
+  if (!data) return <p> No hay estudiantes</p>;
    const Rows =  data.students.students.map(( student: any ) => (
     <StudentRow key={student.id} student={student}/>
   ));

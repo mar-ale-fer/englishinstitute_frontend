@@ -37,8 +37,8 @@ const UsersPage = (props : any) => {
 
 
   if (error) return <div style={{ color: 'red' }}>{error.message}</div>;
-  if (!data) return <p> No hay usuarios</p>;
   if (loading) return <p>Cargando usuarios...</p>;
+  if (!data) return <p> No hay usuarios</p>;
    const Cards =  data.users.users.map(( user: any ) => (
     <Grid key={user.id} item xs={3}>
       <UserCard user={user}/>

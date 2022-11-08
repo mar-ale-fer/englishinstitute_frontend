@@ -133,11 +133,9 @@ function AppBarInteraction({
     const { data: loggeduserdata, loading, error } = useQuery(LOGGED_USER,
        {fetchPolicy: "network-only"});
 
-    // return (<div>{JSON.stringify(loggeduserdata)}</div>)
-
     if (error) return <div style={{ color: "red" }}>{error.message}</div>;
-    if (!loggeduserdata) return <p> No hay información sobre la sesión </p>;
     if (loading) return <p>verificando su sesión...</p>;
+    if (!loggeduserdata) return <p> No hay información sobre la sesión </p>;
   
     const loggeduser = loggeduserdata.LoggedUser;
     if (loggeduser.success === false)
@@ -185,8 +183,7 @@ function AppBarInteraction({
             NQN Institute
           </Typography>    
           <div>
-            {JSON.stringify(user_from_token)}-
-            {JSON.stringify(localStorage.getItem('token'))}
+            {user_from_token.userSessionReactVar.email}
             </div> 
         </Drawer>
   

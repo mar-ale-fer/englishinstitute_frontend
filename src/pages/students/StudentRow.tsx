@@ -35,7 +35,7 @@ export function StudentRow( props : any) {
         <TableCell align="left">{student.observations}</TableCell>
         <TableCell align="left">{student.phoneNumber}</TableCell>
         <TableCell align="left">{moment(student.dateOfBirth).format("DD/MM/YYYY")}</TableCell>
-        <TableCell align='right'>{monthlyTotal}</TableCell>
+        <TableCell align='right'>${monthlyTotal}</TableCell>
         <TableCell align='right'>{courses}</TableCell>
       </TableRow>
   );

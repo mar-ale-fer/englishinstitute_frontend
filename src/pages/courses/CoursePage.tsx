@@ -48,8 +48,8 @@ const CoursesPage = (props : any ) => {
     };
 
     if (error) return <div style={{ color: 'red' }}>{error.message}</div>;
-    if (!data) return <p> No hay cursos</p>;
     if (loading) return <p>Cargando cursos...</p>;
+    if (!data) return <p> No hay cursos</p>;
 
     const Rows =  data.courses.courses.map(( course: any ) => (
           <CourseRow key={course.id} course={course}/>

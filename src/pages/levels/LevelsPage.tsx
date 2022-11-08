@@ -32,8 +32,8 @@ const LevelsPage_ = (props : LevelsPageProps) => {
 
 
   if (error) return <div style={{ color: 'red' }}>{error.message}</div>;
-  if (!data) return <p> No hay niveles</p>;
   if (loading) return <p>Cargando niveles...</p>;
+  if (!data) return <p> No hay niveles</p>;
    const Cards =  data.levels.levels.map(( level: any ) => (
     <div key={level.id} style={{ display: "inline-block" }}>
       <LevelCard level={level}/>
