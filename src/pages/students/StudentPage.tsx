@@ -77,6 +77,8 @@ const StudentsPage = (props : any) => {
               <TableCell align="left">Observaciones</TableCell>
               <TableCell align="right">Teléfono</TableCell>
               <TableCell align="right">Nacimiento</TableCell>
+              <TableCell align="right">Cuota</TableCell>
+              <TableCell align="right">Cursos</TableCell>
           </TableRow>
           </TableHead>
           <TableBody>

@@ -162,9 +162,9 @@ const CourseDetail = () =>  {
       <Stack direction="row" spacing={2}> 
         <Box component="span" sx={{ p: 2, border: '1px dashed grey' }}>
         <Paper style={{maxHeight: 500, overflow: 'auto'}}>          
-          <Stack direction="column" spacing={2}>  
+          <Stack direction="column" spacing={2}> 
+            Matricular estudiantes 
             <StudentsFilters />
-            Todos los Estudiantes
             <Grid container>
               {StudentsList()}
             </Grid>
@@ -173,7 +173,9 @@ const CourseDetail = () =>  {
         </Box>
         <Box component="span" sx={{ p: 2, border: '1px dashed grey' }}>
           <Stack direction="column" spacing={2}>
-            Estudiantes matriculados en el curso
+            <Typography variant="h5" gutterBottom component="div">
+              Matriculados en el curso
+            </Typography>
             {StudentsInCourse(studentsQueryResult)}
           </Stack>        
         </Box>

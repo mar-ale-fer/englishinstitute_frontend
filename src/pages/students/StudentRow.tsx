@@ -8,6 +8,12 @@ import TableCell from '@mui/material/TableCell';
 
 export function StudentRow( props : any) {
   const { student } = props
+  const monthlyTotal = student.courses.reduce((total: number, {monthlyPrice}: { monthlyPrice: number; })=>{
+    return total + monthlyPrice
+  }, 0)
+  const courses = student.courses.reduce((detail: string, { level: {name}}: {level:{name: string}})=>{
+    return detail + `${name}. `
+  },'')
   return (
       <TableRow
         key={student.id}
@@ -29,6 +35,8 @@ export function StudentRow( props : any) {
         <TableCell align="left">{student.observations}</TableCell>
         <TableCell align="left">{student.phoneNumber}</TableCell>
         <TableCell align="left">{moment(student.dateOfBirth).format("DD/MM/YYYY")}</TableCell>
+        <TableCell align='right'>{monthlyTotal}</TableCell>
+        <TableCell align='right'>{courses}</TableCell>
       </TableRow>
   );
 }

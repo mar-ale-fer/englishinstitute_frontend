@@ -13,10 +13,19 @@ query Students($firstName: String!, $lastName: String!, $documentNumber: String!
       documentNumber
       observations
       dateOfBirth
+      courses {
+          id
+          year
+          monthlyPrice
+          active
+          level {
+              name
+          }
+      }
     }
   }
 }
-  `;
+`;
 
 //   vars:
 // {  "firstName": "",
