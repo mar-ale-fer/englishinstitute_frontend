@@ -1,4 +1,4 @@
-import { useQuery, useLazyQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import {useEffect, useState} from 'react'
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
@@ -9,7 +9,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import WebIcon from '@mui/icons-material/Web';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate, useParams } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
@@ -25,8 +24,6 @@ import CourseAddStudent from './CourseAddStudent'
 import CourseRemoveStudent from './CourseRemoveStudent'
 import { GET_COURSES_REFRESH } from './operations/getCoursesRefresh';
 import {COURSE_BY_ID} from './operations/CourseByIdQuery'
-
-type TParams = { entityid: string, random: string };
 
 const fabStyle = {
   position: 'absolute',

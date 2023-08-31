@@ -1,14 +1,11 @@
 import { useState  } from 'react';
 import { useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
 import { COURSE_REMOVE_STUDENT } from './operations/CourseRemoveStudentMutation';
 import { coursesPageNeedsRefresh_RV } from '../../cache';
-// import { myReactiveVariable } from '../cache';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const CourseStudentDelete = (props: { courseId: any; studentId: any; }) => {
-    let navigate = useNavigate()
     const [s_error, sets_error] = useState('')
     const [removeStudentFromCourse, { loading: deleting }] = useMutation(COURSE_REMOVE_STUDENT);
 

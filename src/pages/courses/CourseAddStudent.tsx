@@ -2,7 +2,6 @@ import { useState  } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { COURSE_ADD_STUDENT } from './operations/CourseAddStudentMutation';
-import { coursesPageNeedsRefresh_RV } from '../../cache';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const CourseAddStudent = (props: { courseId: number; studentId: number; }) => {
