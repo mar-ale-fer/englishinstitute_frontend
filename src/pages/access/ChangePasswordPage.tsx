@@ -2,7 +2,7 @@ import { Formik, Form, Field } from "formik";
 import { useMutation } from "@apollo/client";
 import * as Yup from "yup";
 import { TextField } from "formik-material-ui";
-import institute_logo from "../../images/institute_logo.png";
+import institute_logo from "../../images/redigi_logo_2023.png";
 import { Typography, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { USER_CHANGE_OWN_PASSWORD } from "../users/operations/UserChangeOwnPasswordMutation";

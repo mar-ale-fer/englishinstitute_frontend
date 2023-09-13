@@ -72,7 +72,7 @@ export const studentsFilters_RV = makeVar<studentsFiltersType>(studentsFilters_R
 export const studentsPageNeedsRefresh_RV = makeVar<string>("");
 //courses
 export const coursesFilters_RV_initialvalue : coursesFiltersType = {
-  year: 2022,
+  year: 2023,
   schedule: "",
   details: "",
   levelId: "0",

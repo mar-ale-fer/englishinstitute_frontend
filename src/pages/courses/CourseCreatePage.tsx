@@ -4,7 +4,7 @@ import { coursesPageNeedsRefresh_RV } from '../../cache';
 import { entityForm, CourseForm } from './CourseForm';
 
 const initial_values : entityForm = {
-    year: 2022,
+    year: 2023,
     schedule: "",
     details: "",
     monthlyPrice: 0,

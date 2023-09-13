@@ -18,7 +18,7 @@ mutation CourseCreate($year: Float!, $schedule: String!, $details: String!, $mon
 `;
 
 //vars:
-// {  "year": 2022,
+// {  "year": 2023,
 //   "schedule": "días ",  "details": "detalles...",
 //   "monthlyPrice": 50.4,
 //   "levelId": 1,

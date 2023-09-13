@@ -20,7 +20,7 @@ mutation CourseUpdate($courseUpdateId: ID!, $year: Float!, $schedule: String!, $
 //vars:
 // {
 //     "courseUpdateId": 5,
-//     "year": 2022,
+//     "year": 2023,
 //     "schedule": "días ",  "details": "detalles 222...",
 //     "details" : "details 2",
 //     "monthlyPrice": 50.4,

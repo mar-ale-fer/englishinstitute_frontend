@@ -19,7 +19,7 @@ const CourseUpdatePage = () => {
     );
 
     const [s_initivalvalue, sets_initialvalue] = useState({
-        year: 2022,
+        year: 2023,
         schedule: "",
         details: "",
         monthlyPrice: 0,

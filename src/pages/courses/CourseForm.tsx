@@ -22,7 +22,7 @@ export type entityForm = {
 
 const validation_schema = Yup.object({
     year: Yup.number()
-        .min(2022,'Debe ingresar un año reciente')
+        .min(2023,'Debe ingresar un año reciente')
         .required('Requerido'),
     schedule: Yup.string()
         .min(2, 'Debe tener más de 2 caracteres')
